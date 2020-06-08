@@ -2,6 +2,9 @@ package com.estcium.gemini9;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication()
 public class Gemini9Application {
@@ -10,4 +13,13 @@ public class Gemini9Application {
 		SpringApplication.run(Gemini9Application.class, args);
 	}
 
+	@Bean
+	public WebMvcConfigurer corsConfigurer() {
+		return new WebMvcConfigurer() {
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
+				registry.addMapping("/**").allowedOrigins("192.168.1.107");
+			}
+		};
+	}
 }
