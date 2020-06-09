@@ -1,13 +1,20 @@
 package com.estcium.gemini9.model;
 
 import org.springframework.lang.Nullable;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
 @SequenceGenerator(name = "users_id_seq", sequenceName = "users_id_seq", allocationSize = 1)
 public class User {
+
+    private static String ROLE_PREFIX = "ROLE_";
 
     @Id
     @GeneratedValue(strategy= GenerationType.SEQUENCE,generator = "users_id_seq")
@@ -91,6 +98,14 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
+        if(role!=null) {
+            list.add(new SimpleGrantedAuthority(ROLE_PREFIX + role));
+        }
+        return list;
     }
 }
 

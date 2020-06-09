@@ -3,8 +3,9 @@ package com.estcium.gemini9.api;
 import com.estcium.gemini9.model.LoginRequest;
 import com.estcium.gemini9.model.LoginResponse;
 import com.estcium.gemini9.service.UserService;
-import com.estcium.gemini9.util.JwtTokenUtil;
+import com.estcium.gemini9.util.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -13,16 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/login")
 public class LoginController {
 
     @Autowired
-    private JwtTokenUtil jwtTokenUtil;
+    private JwtUtils jwtUtil;
 
     @Autowired
     private UserService userService;
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value= "/login",method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody LoginRequest authenticationRequest) throws Exception
     {
         userService.authenticate(authenticationRequest.getUsername(),authenticationRequest.getPassword());
@@ -32,9 +32,7 @@ public class LoginController {
         //userDetails.setUsername(authenticationRequest.getUsername());
 
 
-        final String token = jwtTokenUtil.generateToken(userDetails);
-        return ResponseEntity.ok(new LoginResponse(token,"Successful"));
+        final String token = jwtUtil.generateJwtToken(userDetails);
+        return new ResponseEntity(new LoginResponse(token,"Successful",userDetails.getAuthorities().toString()), HttpStatus.OK);
     }
-
-
 }

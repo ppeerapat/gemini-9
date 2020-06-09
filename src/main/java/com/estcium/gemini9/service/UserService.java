@@ -13,8 +13,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-
 @Service
 public class UserService implements UserDetailsService {
 
@@ -45,7 +43,7 @@ public class UserService implements UserDetailsService {
         if (u == null) {
             throw new UsernameNotFoundException("Invalid email or password.");
         }
-        return new org.springframework.security.core.userdetails.User(u.getEmail(), u.getPassword(), new ArrayList<>());
+        return new org.springframework.security.core.userdetails.User(u.getEmail(), u.getPassword(), u.getAuthorities());
     }
 
     public void authenticate(String username, String password) throws Exception {

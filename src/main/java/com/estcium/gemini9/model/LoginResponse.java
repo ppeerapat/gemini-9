@@ -7,10 +7,12 @@ public class LoginResponse implements Serializable
 
     private final String jwttoken;
     private final String message;
+    private final String role;
 
-    public LoginResponse(String jwttoken,String message) {
+    public LoginResponse(String jwttoken,String message,String role) {
         this.jwttoken = jwttoken;
         this.message = message;
+        this.role = role;
     }
 
     public String getToken() {
@@ -19,5 +21,9 @@ public class LoginResponse implements Serializable
 
     public String getMessage() {
         return message;
+    }
+
+    public String getRole() {
+        return role;
     }
 }
