@@ -1,9 +1,12 @@
 package com.estcium.gemini9.api;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-//@RequestMapping("/login")
+@RequestMapping("/login")
+@CrossOrigin("*")
 public class LoginController {
 //
 //    @Autowired
