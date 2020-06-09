@@ -56,8 +56,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests().antMatchers("/login").permitAll()
-                .anyRequest().authenticated();
+                .authorizeRequests().antMatchers("/admin/**").hasRole("admin").and()
+                .authorizeRequests()
+                .antMatchers("/login").permitAll().anyRequest().authenticated();
+
 //                .csrf()
 //                .disable()
 //                // dont authenticate this particular request
