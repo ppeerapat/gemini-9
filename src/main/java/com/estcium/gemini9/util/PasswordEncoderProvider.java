@@ -1,4 +1,4 @@
-package com.estcium.gemini9.configuration.authentication;
+package com.estcium.gemini9.util;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

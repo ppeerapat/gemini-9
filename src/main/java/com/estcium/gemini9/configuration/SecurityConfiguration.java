@@ -1,60 +1,69 @@
 package com.estcium.gemini9.configuration;
 
-import com.estcium.gemini9.configuration.authentication.LoginSuccessHandler;
-import com.estcium.gemini9.configuration.authentication.PasswordEncoderProvider;
-import com.estcium.gemini9.configuration.authentication.RestAuthenticationEntryPoint;
+import com.estcium.gemini9.api.jwt.JwtAuthenticationEntryPoint;
+import com.estcium.gemini9.configuration.filter.CorsFilter;
+import com.estcium.gemini9.configuration.filter.JwtRequestFilter;
 import com.estcium.gemini9.service.UserService;
+import com.estcium.gemini9.util.PasswordEncoderProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
-import java.util.Arrays;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.session.SessionManagementFilter;
 
 @Configuration
+@EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private LoginSuccessHandler loginSuccessHandler;
+    //private LoginSuccessHandler loginSuccessHandler = new LoginSuccessHandler();
+
+    //private RestAuthenticationEntryPoint restAuthenticationEntryPoint = new RestAuthenticationEntryPoint();
+    private JwtAuthenticationEntryPoint authenticationEntryPoint = new JwtAuthenticationEntryPoint();
+    private PasswordEncoderProvider passwordEncoder = new PasswordEncoderProvider();
 
     @Autowired
-    private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
+    private JwtRequestFilter jwtRequestFilter;
 
-    @Autowired
-    private PasswordEncoderProvider passwordEncoder;
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+
+    @Bean
+    CorsFilter corsFilter() {
+        CorsFilter filter = new CorsFilter();
+        return filter;
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .addFilterBefore(corsFilter(), SessionManagementFilter.class)
+
                 .csrf().disable()
                 .authorizeRequests().antMatchers("/api/**").authenticated()
                 .and()
                 .httpBasic()
+                //.and()
+//                .exceptionHandling()
+//                    .authenticationEntryPoint(restAuthenticationEntryPoint)
                 .and()
-                .exceptionHandling()
-                    .authenticationEntryPoint(restAuthenticationEntryPoint)
+                .authorizeRequests().antMatchers("/login").permitAll()
                 .and()
-                .formLogin()
-                    .loginProcessingUrl("/login")
-                    .successHandler(loginSuccessHandler)
-                    .failureHandler(new SimpleUrlAuthenticationFailureHandler())
-                    .permitAll()
+                .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint).and().sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .logout()
-                .invalidateHttpSession(true)
-                .clearAuthentication(true)
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .permitAll();
+                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean
@@ -63,16 +72,5 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         auth.setUserDetailsService(userService);
         auth.setPasswordEncoder(passwordEncoder.passwordEncoder());
         return auth;
-    }
-
-    @Bean
-    CorsConfigurationSource corsConfigurationSource()
-    {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("*"));
-        configuration.setAllowedMethods(Arrays.asList("GET","POST"));
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
     }
 }
