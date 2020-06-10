@@ -1,19 +1,13 @@
 package com.estcium.gemini9.model;
 
 import org.springframework.lang.Nullable;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 @Entity
 @Table(name = "users")
 @SequenceGenerator(name = "users_id_seq", sequenceName = "users_id_seq", allocationSize = 1)
 public class User {
-
 
 
     @Id
@@ -29,6 +23,7 @@ public class User {
     private String phone;
     @Nullable
     private String address;
+
 
     @ManyToOne()
     @JoinColumn(name = "role_id", nullable = false)
@@ -102,12 +97,7 @@ public class User {
         this.role = role;
     }
 
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
-        if(role!=null) {
-            list.add(new SimpleGrantedAuthority(role.getName()));
-        }
-        return list;
-    }
+
+
 }
 

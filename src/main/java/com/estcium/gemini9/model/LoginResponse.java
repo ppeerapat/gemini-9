@@ -7,12 +7,12 @@ public class LoginResponse implements Serializable
 
     private final String jwttoken;
     private final String message;
-    private final String role;
+    private final User user;
 
-    public LoginResponse(String jwttoken,String message,String role) {
+    public LoginResponse(String jwttoken,String message,User u) {
         this.jwttoken = jwttoken;
         this.message = message;
-        this.role = role;
+        this.user = u;
     }
 
     public String getToken() {
@@ -23,7 +23,7 @@ public class LoginResponse implements Serializable
         return message;
     }
 
-    public String getRole() {
-        return role;
+    public User getUser() {
+        return user;
     }
 }

@@ -8,10 +8,15 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -33,7 +38,7 @@ public class UserService implements UserDetailsService {
 
     public User save(User u){
         u.setPassword(passwordEncoder.passwordEncoder().encode(u.getPassword()));
-        System.out.println(u);
+        //System.out.println(u);
         return userRepository.save(u);
     }
 
@@ -43,7 +48,9 @@ public class UserService implements UserDetailsService {
         if (u == null) {
             throw new UsernameNotFoundException("Invalid email or password.");
         }
-        return new org.springframework.security.core.userdetails.User(u.getEmail(), u.getPassword(), u.getAuthorities());
+        List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
+            list.add(new SimpleGrantedAuthority(u.getRole().getName()));
+        return new org.springframework.security.core.userdetails.User(u.getEmail(), u.getPassword(), list );
     }
 
     public void authenticate(String username, String password) throws Exception {

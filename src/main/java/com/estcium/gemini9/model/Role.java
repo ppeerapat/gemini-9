@@ -11,6 +11,8 @@ public class Role {
     @Id
     @GeneratedValue(strategy= GenerationType.SEQUENCE,generator = "role_id_seq")
     private Integer id;
+
+
     private String name;
 
     //private Set<User> users;

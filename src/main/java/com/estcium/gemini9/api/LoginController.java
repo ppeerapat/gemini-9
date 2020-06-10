@@ -1,6 +1,6 @@
 package com.estcium.gemini9.api;
 
-import com.estcium.gemini9.model.LoginRequest;
+import com.estcium.gemini9.model.request.LoginRequest;
 import com.estcium.gemini9.model.LoginResponse;
 import com.estcium.gemini9.service.UserService;
 import com.estcium.gemini9.util.JwtUtils;
@@ -28,11 +28,12 @@ public class LoginController {
         userService.authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
         final UserDetails userDetails =
                 userService.loadUserByUsername(authenticationRequest.getUsername());
+
         //JwtUserDetails userDetails = new UserDetails();
         //userDetails.setUsername(authenticationRequest.getUsername());
 
 
         final String token = jwtUtil.generateJwtToken(userDetails);
-        return new ResponseEntity(new LoginResponse(token, "Successful", userDetails.getAuthorities().toString()), HttpStatus.OK);
+        return new ResponseEntity(new LoginResponse(token, "Successful", userService.findByEmail(authenticationRequest.getUsername())), HttpStatus.OK);
     }
 }
