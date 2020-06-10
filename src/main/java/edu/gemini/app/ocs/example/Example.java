@@ -5,10 +5,10 @@
 
 package edu.gemini.app.ocs.example;
 
+import com.estcium.gemini9.model.base.Filter;
+import com.estcium.gemini9.model.base.Lens;
 import edu.gemini.app.ocs.OCS;
 import edu.gemini.app.ocs.controller.VirtualTelescopeHandler;
-import edu.gemini.app.ocs.example.MyObservingProgram;
-import edu.gemini.app.ocs.example.MySciencePlan;
 import edu.gemini.app.ocs.model.*;
 import jparsec.ephem.Target;
 

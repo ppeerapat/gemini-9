@@ -24,6 +24,7 @@ public class DataProcRequirement {
     private double saturation;
 
     public DataProcRequirement() {
+
     }
 
     public DataProcRequirement(TYPE fileType, double fileQuality,
