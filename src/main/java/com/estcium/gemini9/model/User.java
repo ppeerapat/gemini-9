@@ -14,7 +14,7 @@ import java.util.List;
 @SequenceGenerator(name = "users_id_seq", sequenceName = "users_id_seq", allocationSize = 1)
 public class User {
 
-    private static String ROLE_PREFIX = "ROLE_";
+
 
     @Id
     @GeneratedValue(strategy= GenerationType.SEQUENCE,generator = "users_id_seq")
@@ -29,8 +29,10 @@ public class User {
     private String phone;
     @Nullable
     private String address;
-    @Nullable
-    private String role;
+
+    @ManyToOne()
+    @JoinColumn(name = "role_id", nullable = false)
+    private Role role;
 
     public User() {
     }
@@ -92,18 +94,18 @@ public class User {
         this.address = address;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
         if(role!=null) {
-            list.add(new SimpleGrantedAuthority(ROLE_PREFIX + role));
+            list.add(new SimpleGrantedAuthority(role.getName()));
         }
         return list;
     }

@@ -56,7 +56,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests().antMatchers("/admin/**").hasRole("admin").and()
+                .authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN").and()
                 .authorizeRequests()
                 .antMatchers("/login").permitAll().anyRequest().authenticated();
 
