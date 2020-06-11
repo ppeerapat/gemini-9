@@ -7,6 +7,8 @@ import org.springframework.lang.Nullable;
 import javax.persistence.*;
 import java.util.Date;
 
+;
+
 @Entity
 @Table(name = "science_plans")
 @SequenceGenerator(name = "plan_id_seq", sequenceName = "plan_id_seq", allocationSize = 1)
