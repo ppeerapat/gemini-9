@@ -1,7 +1,7 @@
 package com.estcium.gemini9.api;
 
 import com.estcium.gemini9.model.request.LoginRequest;
-import com.estcium.gemini9.model.LoginResponse;
+import com.estcium.gemini9.model.base.LoginResponse;
 import com.estcium.gemini9.service.UserService;
 import com.estcium.gemini9.util.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;

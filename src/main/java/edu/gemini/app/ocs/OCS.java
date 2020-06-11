@@ -5,9 +5,6 @@
 
 package edu.gemini.app.ocs;
 
-import com.estcium.gemini9.model.base.BaseObservingProgram;
-import com.estcium.gemini9.model.base.Filter;
-import com.estcium.gemini9.model.base.Lens;
 import edu.gemini.app.ocs.model.*;
 import jparsec.astronomy.CoordinateSystem;
 import jparsec.ephem.Ephem;

@@ -22,6 +22,9 @@ public class Filter {
         this.weight = weight;
     }
 
+    public Filter(){
+
+    }
     public String getMake() {
         return make;
     }

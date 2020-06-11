@@ -17,7 +17,8 @@ public class Lens {
         this.manufacturer = manufacturer;
         this.year = year;
     }
-
+    public Lens(){
+    }
     public String getMake() {
         return make;
     }

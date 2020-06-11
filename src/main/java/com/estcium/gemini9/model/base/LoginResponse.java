@@ -1,4 +1,6 @@
-package com.estcium.gemini9.model;
+package com.estcium.gemini9.model.base;
+
+import com.estcium.gemini9.model.User;
 
 import java.io.Serializable;
 

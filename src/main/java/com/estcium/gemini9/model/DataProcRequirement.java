@@ -1,5 +1,6 @@
 package com.estcium.gemini9.model;
 
+import com.estcium.gemini9.model.base.Enumerator;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;

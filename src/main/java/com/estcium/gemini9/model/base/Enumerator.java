@@ -1,4 +1,4 @@
-package com.estcium.gemini9.model;
+package com.estcium.gemini9.model.base;
 
 public class Enumerator {
     public enum TELESCOPELOC {
@@ -6,7 +6,7 @@ public class Enumerator {
     }
 
     public enum STATUS {
-        COMPLETE, RUNNING, SUBMITTED, DRAFT, TEST
+        COMPLETE, SUBMITTED, DRAFT, TESTED, FAILED
     }
 
     public enum TYPE {

@@ -1,72 +1,51 @@
-/*
- * Copyright (c) 2020. Chaiyong Ragkhitwetsagul
- * All rights reserved.
- */
-
 package com.estcium.gemini9.model.base;
 
-public class Filter {
-    private String make;
-    private String manufacturer;
-    private String model;
-    private int year;
-    private double size;
-    private double weight;
+import javax.persistence.*;
 
-    public Filter(String make, String manufacturer, String model, int year, double size, double weight) {
-        this.make = make;
-        this.manufacturer = manufacturer;
-        this.model = model;
-        this.year = year;
-        this.size = size;
-        this.weight = weight;
+@Entity
+@Table(name="filters")
+@SequenceGenerator(name = "filters_id_seq",sequenceName = "filters_id_seq",allocationSize = 1)
+public class Filter extends edu.gemini.app.ocs.model.Filter {
+
+    @Id
+    @GeneratedValue(strategy= GenerationType.SEQUENCE,generator = "filters_id_seq")
+    private Integer id;
+
+    @Access(AccessType.PROPERTY)
+    @Override
+    @Column(name="make")
+    public String getMake(){return super.getMake();};
+
+    @Access(AccessType.PROPERTY)
+    @Override
+    @Column(name="model")
+    public String getModel(){return super.getModel();};
+
+    @Access(AccessType.PROPERTY)
+    @Override
+    @Column(name="manufacturer")
+    public String getManufacturer(){return super.getManufacturer();};
+
+    @Access(AccessType.PROPERTY)
+    @Override
+    @Column(name="year")
+    public int getYear(){return super.getYear();};
+
+    @Access(AccessType.PROPERTY)
+    @Override
+    @Column(name="size")
+    public double getSize(){return super.getSize();};
+
+    @Access(AccessType.PROPERTY)
+    @Override
+    @Column(name="weight")
+    public double getWeight(){return super.getWeight();};
+
+    public Filter(){
     }
 
-    public String getMake() {
-        return make;
-    }
 
-    public void setMake(String make) {
-        this.make = make;
-    }
-
-    public String getManufacturer() {
-        return manufacturer;
-    }
-
-    public void setManufacturer(String manufacturer) {
-        this.manufacturer = manufacturer;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
-
-    public double getSize() {
-        return size;
-    }
-
-    public void setSize(double size) {
-        this.size = size;
-    }
-
-    public double getWeight() {
-        return weight;
-    }
-
-    public void setWeight(double weight) {
-        this.weight = weight;
+    public Integer getId() {
+        return id;
     }
 }

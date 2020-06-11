@@ -1,56 +1,40 @@
-/*
- * Copyright (c) 2020. Chaiyong Ragkhitwetsagul
- * All rights reserved.
- */
-
 package com.estcium.gemini9.model.base;
 
-public class Lens {
-    private String make;
-    private String model;
-    private String manufacturer;
-    private int year;
+import javax.persistence.*;
 
+@Entity
+@Table(name="lens")
+@SequenceGenerator(name = "lens_id_seq",sequenceName = "lens_id_seq",allocationSize = 1)
+public class Lens extends edu.gemini.app.ocs.model.Lens {
+
+    @Id
+    @GeneratedValue(strategy= GenerationType.SEQUENCE,generator = "lens_id_seq")
+    private Integer id;
+
+    @Access(AccessType.PROPERTY)
+    @Override
+    @Column(name="make")
+    public String getMake(){return super.getMake();};
+    @Access(AccessType.PROPERTY)
+    @Override
+    @Column(name="model")
+    public String getModel(){return super.getModel();};
+    @Access(AccessType.PROPERTY)
+    @Override
+    @Column(name="manufacturer")
+    public String getManufacturer(){return super.getManufacturer();};
+    @Access(AccessType.PROPERTY)
+    @Override
+    @Column(name="year")
+    public int getYear(){return super.getYear();};
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
     public Lens(){
-
-    }
-
-    public Lens(String make, String model, String manufacturer, int year) {
-        this.make = make;
-        this.model = model;
-        this.manufacturer = manufacturer;
-        this.year = year;
-    }
-
-    public String getMake() {
-        return make;
-    }
-
-    public void setMake(String make) {
-        this.make = make;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    public String getManufacturer() {
-        return manufacturer;
-    }
-
-    public void setManufacturer(String manufacturer) {
-        this.manufacturer = manufacturer;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
     }
 }

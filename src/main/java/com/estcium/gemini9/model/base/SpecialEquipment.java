@@ -1,44 +1,36 @@
-/*
- * Copyright (c) 2020. Chaiyong Ragkhitwetsagul
- * All rights reserved.
- */
-
 package com.estcium.gemini9.model.base;
 
+import com.estcium.gemini9.model.ObservingProgram;
+
+import javax.persistence.*;
 import java.util.Date;
 
-public class SpecialEquipment {
-    private String equipmentName;
-    private String ownerName;
-    private Date installedDate;
+@Entity
+@Table(name = "special_equipment")
+@SequenceGenerator(name = "special_equipment_id_seq",sequenceName = "special_equipment_id_seq",allocationSize = 1)
+public class SpecialEquipment extends edu.gemini.app.ocs.model.SpecialEquipment {
 
-    public SpecialEquipment(String equipmentName, String ownerName, Date installedDate) {
-        this.equipmentName = equipmentName;
-        this.ownerName = ownerName;
-        this.installedDate = installedDate;
-    }
+    @Id
+    @GeneratedValue(strategy= GenerationType.SEQUENCE,generator = "lens_id_seq")
+    private Integer id;
 
-    public String getEquipmentName() {
-        return equipmentName;
-    }
+    @Access(AccessType.PROPERTY)
+    @Override
+    @Column(name="name")
+    public String getEquipmentName(){return super.getEquipmentName();}
 
-    public void setEquipmentName(String equipmentName) {
-        this.equipmentName = equipmentName;
-    }
+    @Access(AccessType.PROPERTY)
+    @Override
+    @Column(name="owner")
+    public String getOwnerName(){return super.getOwnerName();}
 
-    public String getOwnerName() {
-        return ownerName;
-    }
+    @Access(AccessType.PROPERTY)
+    @Override
+    @Column(name="date")
+    public Date getInstalledDate(){return super.getInstalledDate();}
 
-    public void setOwnerName(String ownerName) {
-        this.ownerName = ownerName;
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "op_id")
+    private ObservingProgram observingProgram;
 
-    public Date getInstalledDate() {
-        return installedDate;
-    }
-
-    public void setInstalledDate(Date installedDate) {
-        this.installedDate = installedDate;
-    }
 }

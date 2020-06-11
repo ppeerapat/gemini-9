@@ -1,6 +1,6 @@
 package com.estcium.gemini9.model.request;
 
-import com.estcium.gemini9.model.Enumerator;
+import com.estcium.gemini9.model.base.Enumerator;
 
 import java.io.Serializable;
 import java.util.Date;

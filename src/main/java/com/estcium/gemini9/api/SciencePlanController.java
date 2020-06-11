@@ -6,6 +6,7 @@ import com.estcium.gemini9.model.request.SciencePlanRequest;
 import com.estcium.gemini9.service.SciencePlanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -43,4 +44,26 @@ public class SciencePlanController {
             return ResponseEntity.ok(res);
         }
     }
+
+    @RequestMapping(value = "/test",method = RequestMethod.GET)
+    public ResponseEntity<?> testSciencePlan(@RequestParam Integer id){
+        try {
+            return ResponseEntity.ok(sciencePlanService.testSciencePlan(id));
+        }catch (Exception e){
+            Message res = new Message(e.getMessage());
+            return ResponseEntity.ok(res);
+        }
+}
+
+    @RequestMapping(value = "/validate",method = RequestMethod.GET)
+    @PreAuthorize("hasRole('OBSERVER')")
+    public ResponseEntity<?> testSciencePlan(@RequestParam Integer id, @RequestParam Integer uid){
+        try {
+            return ResponseEntity.ok(sciencePlanService.validateSciencePlan(id,uid));
+        }catch (Exception e){
+            Message res = new Message(e.getMessage());
+            return ResponseEntity.ok(res);
+        }
+    }
+
 }

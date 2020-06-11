@@ -18,6 +18,9 @@ public class SpecialEquipment {
         this.installedDate = installedDate;
     }
 
+    public SpecialEquipment(){
+
+    }
     public String getEquipmentName() {
         return equipmentName;
     }

@@ -5,7 +5,7 @@
 
 package edu.gemini.app.ocs.example;
 
-import com.estcium.gemini9.model.base.BaseObservingProgram;
+import edu.gemini.app.ocs.model.BaseObservingProgram;
 
 public class MyObservingProgram extends BaseObservingProgram {
     private String notes;
@@ -17,4 +17,5 @@ public class MyObservingProgram extends BaseObservingProgram {
     public void setNotes(String notes) {
         this.notes = notes;
     }
+
 }

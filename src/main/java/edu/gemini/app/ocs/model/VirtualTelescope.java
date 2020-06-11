@@ -5,6 +5,8 @@
 
 package edu.gemini.app.ocs.model;
 
+import com.estcium.gemini9.model.SciencePlan;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,7 +18,7 @@ public class VirtualTelescope {
     private String name;
     private String location;
     private Date installedDate;
-    private BaseSciencePlan plan = null;
+    private SciencePlan plan = null;
 
     public static String NORTH = "Gemini North";
     public static String SOUTH = "Gemini South";
@@ -70,7 +72,7 @@ public class VirtualTelescope {
      * Assign a science plan to the virtual telscope
      * @param plan - a science plan, which can be a subclass of {@link BaseSciencePlan} class.
      */
-    public void setSciencePlan(BaseSciencePlan plan) {
+    public void setSciencePlan(SciencePlan plan) {
         this.plan = plan;
     }
 
@@ -78,7 +80,7 @@ public class VirtualTelescope {
      * Get the currently assigned science plan
      * @return the science plan
      */
-    public BaseSciencePlan getSciencePlan() {
+    public SciencePlan getSciencePlan() {
         return this.plan;
     }
 
