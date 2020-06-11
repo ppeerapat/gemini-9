@@ -19,10 +19,10 @@
 	</properties>
 	<dependencies>
 		<dependency>
-			<groupId>jparsec</groupId>
+			<groupId>es.oan.conga</groupId>
 			<artifactId>jparsec</artifactId>
+			<version>1.113</version>
 			<scope>system</scope>
-			<version>1.0</version>
 			<systemPath>${basedir}\lib\jparsec.jar</systemPath>
 		</dependency>
 		<dependency>
