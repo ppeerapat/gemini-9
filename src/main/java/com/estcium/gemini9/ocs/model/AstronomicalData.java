@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-package edu.gemini.app.ocs.model;
+package com.estcium.gemini9.ocs.model;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

@@ -1,7 +1,7 @@
 package com.estcium.gemini9.repository;
 
-import edu.gemini.app.ocs.controller.VirtualTelescopeHandler;
-import edu.gemini.app.ocs.model.VirtualTelescope;
+import com.estcium.gemini9.ocs.controller.VirtualTelescopeHandler;
+import com.estcium.gemini9.ocs.model.VirtualTelescope;
 
 import java.util.ArrayList;
 

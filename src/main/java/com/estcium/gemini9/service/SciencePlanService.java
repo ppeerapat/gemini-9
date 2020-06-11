@@ -9,7 +9,7 @@ import com.estcium.gemini9.repository.DPRRepository;
 import com.estcium.gemini9.repository.Gemini;
 import com.estcium.gemini9.repository.SciencePlanRepository;
 import com.estcium.gemini9.repository.UserRepository;
-import edu.gemini.app.ocs.model.VirtualTelescope;
+import com.estcium.gemini9.ocs.model.VirtualTelescope;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

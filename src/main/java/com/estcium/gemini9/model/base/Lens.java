@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Entity
 @Table(name="lens")
 @SequenceGenerator(name = "lens_id_seq",sequenceName = "lens_id_seq",allocationSize = 1)
-public class Lens extends edu.gemini.app.ocs.model.Lens {
+public class Lens extends com.estcium.gemini9.ocs.model.Lens {
 
     @Id
     @GeneratedValue(strategy= GenerationType.SEQUENCE,generator = "lens_id_seq")

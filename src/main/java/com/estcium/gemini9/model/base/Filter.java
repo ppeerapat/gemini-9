@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Entity
 @Table(name="filters")
 @SequenceGenerator(name = "filters_id_seq",sequenceName = "filters_id_seq",allocationSize = 1)
-public class Filter extends edu.gemini.app.ocs.model.Filter {
+public class Filter extends com.estcium.gemini9.ocs.model.Filter {
 
     @Id
     @GeneratedValue(strategy= GenerationType.SEQUENCE,generator = "filters_id_seq")

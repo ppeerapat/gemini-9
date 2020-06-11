@@ -8,7 +8,7 @@ import java.util.Date;
 @Entity
 @Table(name = "special_equipment")
 @SequenceGenerator(name = "special_equipment_id_seq",sequenceName = "special_equipment_id_seq",allocationSize = 1)
-public class SpecialEquipment extends edu.gemini.app.ocs.model.SpecialEquipment {
+public class SpecialEquipment extends com.estcium.gemini9.ocs.model.SpecialEquipment {
 
     @Id
     @GeneratedValue(strategy= GenerationType.SEQUENCE,generator = "lens_id_seq")
