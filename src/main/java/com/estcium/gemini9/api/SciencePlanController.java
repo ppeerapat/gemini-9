@@ -36,12 +36,12 @@ public class SciencePlanController {
     }
 
     @RequestMapping(value="/submit",method = RequestMethod.GET)
-    public ResponseEntity<?> updateSciencePlan(@RequestParam Integer id, @RequestParam Integer uid){
+    public ResponseEntity<?> submitSciencePlan(@RequestParam Integer id, @RequestParam Integer uid){
         try {
             return ResponseEntity.ok(sciencePlanService.submitSciencePlan(id, uid));
         }catch (Exception e){
             Message res = new Message(e.getMessage());
-            return ResponseEntity.ok(res);
+            return ResponseEntity.status(400).body(res);
         }
     }
 
@@ -51,18 +51,19 @@ public class SciencePlanController {
             return ResponseEntity.ok(sciencePlanService.testSciencePlan(id));
         }catch (Exception e){
             Message res = new Message(e.getMessage());
-            return ResponseEntity.ok(res);
+            return ResponseEntity.status(400).body(res);
         }
 }
 
     @RequestMapping(value = "/validate",method = RequestMethod.GET)
     @PreAuthorize("hasRole('OBSERVER')")
-    public ResponseEntity<?> testSciencePlan(@RequestParam Integer id, @RequestParam Integer uid){
+    public ResponseEntity<?> validateSciencePlan(@RequestParam Integer id, @RequestParam Integer uid){
         try {
+            //System.out.println(id+" "+uid);
             return ResponseEntity.ok(sciencePlanService.validateSciencePlan(id,uid));
         }catch (Exception e){
             Message res = new Message(e.getMessage());
-            return ResponseEntity.ok(res);
+            return ResponseEntity.status(400).body(res);
         }
     }
 

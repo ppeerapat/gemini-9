@@ -28,13 +28,13 @@ public class ObservingProgramController {
         return ResponseEntity.ok(observingProgramService.getObservingProgram(id));
     }
 
-    @RequestMapping("/create")
+    @RequestMapping(value="/create",method = RequestMethod.POST )
     public ResponseEntity<?> createObservingProgram(@RequestBody ObservingProgram op){
         try{
             return ResponseEntity.ok(observingProgramService.createObservingProgram(op,op.getSciencePlan().getId()));
         }catch (Exception e){
             Message res = new Message(e.getMessage());
-            return ResponseEntity.ok(res);
+            return ResponseEntity.status(400).body(res);
         }
 
     }
@@ -61,6 +61,11 @@ public class ObservingProgramController {
         }catch (Exception e){
             return e.getMessage();
         }
+    }
+
+    @GetMapping(path = "")
+    public ResponseEntity<?> getAllObservingProgram(){
+       return ResponseEntity.ok(observingProgramService.getAllObservingProgram());
     }
 
 }

@@ -119,21 +119,32 @@ public class SciencePlanService {
 
     public SciencePlan validateSciencePlan(Integer id, Integer uid) throws Exception{
         SciencePlan sp = sciencePlanRepository.findById(id).get();
+        //System.out.println(sp.toString());
+        if(sp==null){
+            throw new Exception("Science Plan not found");
+        }
         if(sp.getStatus()!= Enumerator.STATUS.SUBMITTED){
             throw new Exception("Science Plan is not SUBMITTED");
         }
         User validator = userRepository.findById(uid).get();
+        System.out.println(validator);
         if(validator==null){
+           // System.out.println("1");
             throw new Exception("User not found");
         }
-        if(!validator.getRole().equals("OBSERVER")){
+        System.out.println(validator.getRole().getName());
+        if(!validator.getRole().getName().equals("ROLE_OBSERVER")){
+           // System.out.println("2");
             throw new Exception("User is not OBSERVER");
         }
         if(sp.validate()==false){
+           // System.out.println("3");
             throw new Exception("Science plan is not valid");
         }
+        //System.out.println(sp.toString());
         sp.setValidatorUser(validator);
         sp.setStatus(Enumerator.STATUS.COMPLETE);
+        //System.out.println(sp.toString());
         return sciencePlanRepository.save(sp);
     }
 }

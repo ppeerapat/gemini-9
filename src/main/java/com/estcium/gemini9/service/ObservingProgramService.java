@@ -37,4 +37,5 @@ public class ObservingProgramService {
         return observingProgramRepository.findById(id).get();
     }
 
+    public Iterable<ObservingProgram> getAllObservingProgram(){return observingProgramRepository.findAll();}
 }
