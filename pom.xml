@@ -23,7 +23,7 @@
 			<artifactId>jparsec</artifactId>
 			<scope>system</scope>
 			<version>1.0</version>
-			<systemPath>${basedir}\lib\ldapjdk.jar</systemPath>
+			<systemPath>${basedir}\lib\jparsec.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
