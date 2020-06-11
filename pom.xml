@@ -21,6 +21,7 @@
 		<dependency>
 			<groupId>jparsec</groupId>
 			<artifactId>jparsec</artifactId>
+			<scope>system</scope>
 			<version>1.0</version>
 			<systemPath>${project.basedir}/lib/jparsec.jar</systemPath>
 		</dependency>
