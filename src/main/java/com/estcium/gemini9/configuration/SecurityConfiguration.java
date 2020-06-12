@@ -58,6 +58,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN").and()
+                .authorizeRequests().antMatchers("/observingprogram/**").hasRole("OBSERVER").and()
                 .authorizeRequests()
                 .antMatchers("/login").permitAll().anyRequest().authenticated();
 
